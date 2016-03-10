@@ -1,0 +1,16 @@
+{
+  "name": "acos-jsparsons",
+  "version": "0.1",
+  "description": "JSVEE",
+  "main": "index.js",
+  "scripts": {
+    "scripts": {
+      "preinstall": "git submodule update --init"
+    }
+  },
+  "author": "Lassi",
+  "license": "MIT",
+  "dependencies": {
+    "fs": "0.0.2"
+  }
+}
