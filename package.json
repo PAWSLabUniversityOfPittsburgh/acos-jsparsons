@@ -1,14 +1,12 @@
 {
   "name": "acos-jsparsons",
   "version": "0.1.0",
-  "description": "JSVEE",
+  "description": "Jsparsons content type for Acos-servers",
   "main": "index.js",
   "scripts": {
-    "scripts": {
       "preinstall": "git submodule update --init"
-    }
   },
-  "author": "Lassi",
+  "author": "Lassi Haaranen",
   "license": "MIT",
   "dependencies": {
     "fs": "0.0.2"
