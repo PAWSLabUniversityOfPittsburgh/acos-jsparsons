@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "Jsparsons content type for Acos-servers",
   "main": "index.js",
+  "repository" : { 
+    "type" : "git", 
+    "url" : "https://github.com/acos-server/acos-jsparsons"
+  },
   "scripts": {
       "preinstall": "git submodule update --init"
   },
