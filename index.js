@@ -77,7 +77,7 @@ JSPARSONS.register = function(handlers, app, conf) {
 
 JSPARSONS.namespace = 'jsparsons';
 JSPARSONS.installedContentPackages = [];
-
+JSPARSONS.packageType = 'content-type';
 JSPARSONS.meta = {
     'name': 'jsparsons',
     'shortDescription': 'Content type for Parson\'s exercises.',
