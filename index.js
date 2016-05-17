@@ -22,7 +22,7 @@ JSPARSONS.addToHead = function(params) {
     '<script src="/static/jsparsons/js-parsons/parsons.js" type="text/javascript"></script>\n';
   };
 
-JSPARSONS.handleEvent = function(event, payload, req, res, protocolPayload) {
+JSPARSONS.handleEvent = function(event, payload, req, res, protocolPayload, responseObj, cb) {
     var dir = JSPARSONS.logDirectory + req.params.contentPackage;
     /* req.params e.g.:
       { protocol: 'aplus',
@@ -33,9 +33,13 @@ JSPARSONS.handleEvent = function(event, payload, req, res, protocolPayload) {
     if (event == 'log') {
         fs.mkdir(dir, '0775¨', function(err) {
             var data = new Date().toISOString() + '\t' + JSON.stringify(payload.log) + '\t' + JSON.stringify(protocolPayload || {}) + '\n';
-            var logName = payload.problemName +  '.log';
-            fs.writeFile(dir + '/' + logName, data, {flag: 'a'}, function(err) {});
+            var logName = payload.problemName.replace(/\.|\/|\\|~/g, "-") + '.log';
+            fs.writeFile(dir + '/' + logName, data, {flag: 'a'}, function(err) {
+              cb(event, payload, req, res, protocolPayload, responseObj);
+            });
         });
+    } else {
+      cb(event, payload, req, res, protocolPayload, responseObj);
     }
 };
 
@@ -84,7 +88,7 @@ JSPARSONS.meta = {
     'description': '',
     'author': 'Lassi Haaranen',
     'license': 'MIT',
-    'version': '0.0.1',
+    'version': '0.2.0',
     'url': ''
 };
 
