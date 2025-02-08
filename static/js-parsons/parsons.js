@@ -140,7 +140,7 @@
     mainmod = execResult.mainmod;
     for (var i = 0; i < variables.length; i++) {
       varname = variables[i];
-      result.variables[varname] = mainmod.tp$getattr(varname);
+      result.variables[varname] = mainmod.$d[varname];
     }
     result._output = execResult.output;
     return result;
@@ -371,7 +371,8 @@
 
     try {
       mainmod = this._python_exec(executableCode).mainmod;
-      result = JSON.parse(mainmod.tp$getattr("_test_result").v);
+    //result = JSON.parse(mainmod.tp$getattr("_test_result").v);
+    result = JSON.parse(mainmod.$d._test_result)
     } catch (e) {
       result = [{status: "error", _error: e.toString() }];
     }
@@ -871,6 +872,8 @@
      //To collect statistics, feedback should not be based on this
      this.user_actions = [];
      
+    this.constructed_lines = [];
+    
      //State history for feedback purposes
      this.state_path = [];
      this.states = {};
@@ -1009,11 +1012,17 @@
      this.extra_lines = initial_structures.distractors;
      this.modified_lines = initial_structures.widgetInitial;
      var id_prefix = this.id_prefix;
+    this.constructed_lines = this.options.constructed_lines.split(',').filter(e=> e.length >0).map(e => parseInt(e) - 1)
      
      // Add ids to the line objects in the user-draggable lines
-     $.each(this.modified_lines, function(index, item) {
+    $.each(this.modified_lines, (index, item) => {
        item.id = id_prefix + index;
+      if(this.constructed_lines.includes(index)) {
+        item.indent = this.model_solution[index].indent
+      } else {
        item.indent = 0;
+      }
+      
      });
    };
 
@@ -1328,12 +1337,21 @@
 
    ParsonsWidget.prototype.shuffleLines = function() {
        var permutation = (this.options.permutation?this.options.permutation:this.getRandomPermutation)(this.modified_lines.length);
+
+      var constructedIdList = [];
+      for(var i in this.constructed_lines) {
+       constructedIdList.push(this.modified_lines[i].id);
+      }
+
        var idlist = [];
        for(var i in permutation) {
+          if(!this.constructed_lines.includes(parseInt(permutation[i]))) {
            idlist.push(this.modified_lines[permutation[i]].id);
        }
+      }
+
        if (this.options.trashId) {
-           this.createHTMLFromLists([],idlist);
+          this.createHTMLFromLists(constructedIdList,idlist);
        } else {
            this.createHTMLFromLists(idlist,[]);
        }
@@ -1353,16 +1371,25 @@
     };
 
 
-    ParsonsWidget.prototype.codeLineToHTML = function(codeline) {
+   ParsonsWidget.prototype.codeLineToHTML = function(codeline, fixed) {
+       if(fixed) {
+         var line = document.createElement('li')
+         $(line).attr('id', codeline.id).addClass('prettyprint lang-py fixed-code-line correct').html(codeline.code).css("margin-left", this.options.x_indent * codeline.indent + "px")
+         //return '<li id="' + codeline.id + '" class="prettyprint lang-py fixed-code-line">' + codeline.code + '<\/li>';
+         return line.outerHTML
+       } else {
         return '<li id="' + codeline.id + '" class="prettyprint lang-py">' + codeline.code + '<\/li>';
+       }
+       
     };
 
-    ParsonsWidget.prototype.codeLinesToHTML = function(codelineIDs, destinationID) {
+   ParsonsWidget.prototype.codeLinesToHTML = function(codelineIDs, destinationID, fixed) {
         var lineHTML = [];
         for(var id in codelineIDs) {
             var line = this.getLineById(codelineIDs[id]);
-            lineHTML.push(this.codeLineToHTML(line));
+           lineHTML.push(this.codeLineToHTML(line, fixed));
         }
+
         return '<ul id="ul-' + destinationID + '">'+lineHTML.join('')+'</ul>';
     };
 
@@ -1374,7 +1401,7 @@
          this.codeLinesToHTML(trashIDs, this.options.trashId);
        $("#" + this.options.trashId).html(html);
        html = (this.options.solution_label?'<p>'+this.options.solution_label+'</p>':'') +
-         this.codeLinesToHTML(solutionIDs, this.options.sortableId);
+        this.codeLinesToHTML(solutionIDs, this.options.sortableId, true);
        $("#" + this.options.sortableId).html(html);
      } else {
        html = this.codeLinesToHTML(solutionIDs, this.options.sortableId);
@@ -1388,6 +1415,7 @@
      var that = this;
      var sortable = $("#ul-" + this.options.sortableId).sortable(
        {
+        cancel: ".fixed-code-line",
          start : function() { that.clearFeedback(); },
          stop : function(event, ui) {
            if ($(event.target)[0] != ui.item.parent()[0]) {
@@ -1410,6 +1438,7 @@
      if (this.options.trashId) {
        var trash = $("#ul-" + this.options.trashId).sortable(
          {
+          cancel: ".fixed-code-line",
            connectWith: sortable,
            start: function() { that.clearFeedback(); },
            receive: function(event, ui) {

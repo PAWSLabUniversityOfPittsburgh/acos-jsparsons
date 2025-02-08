@@ -73,6 +73,11 @@ li.correctPosition, .testcase.pass {
     border:1px solid green;
 }
 
+.fixed-code-line {
+    background-color: #DFF2BF !important;
+    cursor: not-allowed !important;
+}
+
 .testcase { padding: 10px; margin-bottom: 10px;}
 .testcase .msg { font-weight: bold; }
 .testcase .error { color: red;}
@@ -108,4 +113,21 @@ li.correctPosition, .testcase.pass {
     content: "??";
     display: block;
     color: red;
+}
+
+#ace-editor-parent {
+    position: relative;
+}
+
+#ace-editor {
+    border: 1px solid lightgray;
+    left: 0;
+    max-width: 40%;
+}
+
+#instructions {
+    padding: 1px;
+    background-color: lightgoldenrodyellow;
+    margin-left: 15px;
+    font-size: larger
 }

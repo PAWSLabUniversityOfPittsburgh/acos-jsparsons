@@ -14,7 +14,7 @@ JSPARSONS.getLibCode = function(libs) {
 };
 
 JSPARSONS.addToHead = function(params) {
-  var libs = ['prettify.js', 'jquery.min.js', 'jquery-ui.min.js', 'underscore-min.js', 'lis.js', 'skulpt.js', 'skulpt-stdlib.js'];
+  var libs = ['prettify.js', 'jquery.min.js', 'jquery-ui.min.js', 'underscore-min.js', 'lis.js', 'skulpt.js', 'skulpt-stdlib.js', 'ace.js', 'mode-python.js', 'python.js', 'theme-xcode.js'];
   return JSPARSONS.getLibCode(libs) +
     '<script src="/static/jsparsons/acos-jsparsons.js" type="text/javascript"></script>\n' +
     '<link href="/static/jsparsons/js-parsons/lib/prettify.css" rel="stylesheet">\n' +
@@ -60,10 +60,11 @@ JSPARSONS.addToBody = function(params) {
 JSPARSONS.initialize = function(req, params, handlers, cb) {
   // Initialize the content type
   params.headContent += JSPARSONS.addToHead(params);
-  params.bodyContent += JSPARSONS.addToBody(params);
 
   // Initialize the content package
   handlers.contentPackages[req.params.contentPackage].initialize(req, params, handlers, function() {
+    params.bodyContent += JSPARSONS.addToBody(params);
+    params.bodyContent += params.footer
     cb();
   });
 

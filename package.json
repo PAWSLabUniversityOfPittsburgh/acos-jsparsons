@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/acos-server/acos-jsparsons"
+    "url": "https://github.com/PAWSLabUniversityOfPittsburgh/acos-jsparsons"
   },
   "author": "Lassi Haaranen",
   "license": "MIT",
