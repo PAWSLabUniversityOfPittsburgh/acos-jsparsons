@@ -126,10 +126,12 @@ li.correctPosition, .testcase.pass {
 }
 
 #instructions {
-    padding: 1px;
+    margin-left: 2%;
+    margin-top: 1%;
+    padding: 10px 5px 5px 10px;
     background-color: lightgoldenrodyellow;
-    margin-left: 15px;
-    font-size: larger
+    font-size: medium;
+    width: 80%;
 }
 
 #feedback-dialog {
