@@ -136,3 +136,16 @@ li.correctPosition, .testcase.pass {
     display: none;
     /* Hide the dialog by default */
 }
+
+.btn {
+	margin: 4px;
+	padding: 0 1rem !important;
+}
+
+#button-div {
+    float: right;
+    padding-right: 38%;
+}
+
+
+

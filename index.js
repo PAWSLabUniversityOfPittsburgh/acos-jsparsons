@@ -20,6 +20,7 @@ JSPARSONS.addToHead = function(params) {
     '<link href="/static/jsparsons/js-parsons/lib/prettify.css" rel="stylesheet">\n' +
     '<link href="/static/jsparsons/js-parsons/parsons.css" rel="stylesheet">\n' +
     '<link href="/static/jsparsons/js-parsons/lib/jquery-ui.css" rel="stylesheet">\n' +
+    '<link href="/static/jsparsons/js-parsons/lib/materialize.min.css" rel="stylesheet">\n' +
     '<script src="/static/jsparsons/js-parsons/parsons.js" type="text/javascript"></script>\n';
   };
 
@@ -52,10 +53,10 @@ JSPARSONS.addToBody = function(params) {
         '<div id="sortable" class="sortable-code">' +
         '</div>' +
         '<div style="clear:both;"></div>' +
-        '<p>' +
-        '    <a href="#" id="newInstanceLink">New instance</a>' +
-        '    <a href="#" id="feedbackLink">Get feedback</a>' +
-        '</p>';
+        '<div id="button-div">' +
+        '    <a href="#" id="newInstanceLink" class="waves-effect waves-light btn btn-sm">Reset</a>' +
+        '    <a href="#" id="feedbackLink" class="waves-effect waves-light btn btn-sm">Check</a>' +
+        '</div>';
 };
 
 JSPARSONS.initialize = function(req, params, handlers, cb) {
