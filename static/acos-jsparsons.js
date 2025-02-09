@@ -8,7 +8,13 @@ var unittest;
 
 function displayErrors(feedback) { 
   if(feedback.length > 0) { 
-    alert(feedback[0]); 
+    $("#feedback-dialog").html(feedback[0]).dialog().dialog("open");
+  } 
+}
+
+function display_feedback(feedback) { 
+  if(feedback.length > 0) { 
+    $("#feedback-dialog").html(feedback[0]).dialog().dialog("open");
   } 
 }
 

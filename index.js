@@ -19,6 +19,7 @@ JSPARSONS.addToHead = function(params) {
     '<script src="/static/jsparsons/acos-jsparsons.js" type="text/javascript"></script>\n' +
     '<link href="/static/jsparsons/js-parsons/lib/prettify.css" rel="stylesheet">\n' +
     '<link href="/static/jsparsons/js-parsons/parsons.css" rel="stylesheet">\n' +
+    '<link href="/static/jsparsons/js-parsons/lib/jquery-ui.css" rel="stylesheet">\n' +
     '<script src="/static/jsparsons/js-parsons/parsons.js" type="text/javascript"></script>\n';
   };
 
