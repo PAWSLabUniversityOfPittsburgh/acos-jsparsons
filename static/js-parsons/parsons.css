@@ -1,23 +1,46 @@
 /** Stylesheet for the puzzles */
 
+body {
+    border: 1px lightgray dotted;
+ }
+
 .sortable-code {
     position: static;
     padding-left: 0px;
     margin-left: 2%;
     float: left;
 }
+
+.sortable-code > p
+{
+   font-style: italic; 
+   color: gray;   
+}
+
+
 #sortableTrash { width: 38%; }
 #sortable { width: 56%; }
+
 .sortable-code ul {
     font-size: 120%;
     font-family: monospace;
-    list-style: none;
-    background-color: #efefff;
+
     padding-bottom: 10px;
-    padding-left: 0;
-    margin-left: 0;
-    border: 1px solid #efefff;;
+    padding-left: 0px;
+    margin-left: 0px;
+    list-style: none;
+
+    border-image: initial;
+
+    background-color: #efefff;
+    border: 1px solid #efefff;
+    padding-top: 5px;
 }
+
+.ui-sortable-helper {
+    margin-left: 5px!;
+}
+
 .sortable-code ul:empty {
   padding-bottom: 30px;
 }
@@ -27,17 +50,36 @@
 ul.output {
     background-color: #FFA;
 }
+
+ul#ul-sortable.output {
+    margin-left: 5px;
+    margin-right: 5px;
+ }
+
+ ul.output > * {
+    margin-left: 5px
+}
+
+ ul#ul-sortable.output li {
+    background-color: #efefff;
+ }
+ 
+
 .sortable-code li {
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    border-radius: 10px;
-    background-color:#EFEFEF;
-    border:1px solid lightgray;
-    padding:10px;
     margin-top: 5px;
+    cursor: move;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: lightgray;
+    border-image: initial;
+    padding: 10px;
     white-space: nowrap;
     overflow: hidden;
-    cursor: move;
+
+    background-color: lightyellow;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .sortable-code li:hover {
     overflow: visible;
@@ -126,13 +168,16 @@ li.correctPosition, .testcase.pass {
 }
 
 #instructions {
-    margin-left: 2%;
-    margin-top: 1%;
-    padding: 10px 5px 5px 10px;
-    background-color: lightgoldenrodyellow;
     font-size: medium;
-    width: 80%;
+    padding: 15px;
+    background-color: whitesmoke;
+    border-bottom: 1px lightgray dotted;  
 }
+
+div#instructions > hr {
+    display: none;
+    /* ALTERNATIVE TRIAL border: 0.1px #eee dashed; */
+ }
 
 #feedback-dialog {
     display: none;
@@ -145,9 +190,21 @@ li.correctPosition, .testcase.pass {
 }
 
 #button-div {
-    float: right;
-    padding-right: 38%;
+   margin-top: 0px;
+   width: 100%;
+   padding: 10px;
+   min-height: 65px;
+   padding-right: 2%;
+
+   /* ALTERNATIVE - this CAN BE TRIED 
+   border-top: 1px lightgray dotted;
+   background-color: whitesmoke;  same with #instructions */
+
 }
+
+div#button-div a {
+    float: right;
+ }
 
 
 
