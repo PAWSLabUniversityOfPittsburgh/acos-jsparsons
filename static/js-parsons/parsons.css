@@ -15,6 +15,7 @@ body {
 {
    font-style: italic; 
    color: gray;   
+   margin-bottom: 1px;
 }
 
 
@@ -51,18 +52,18 @@ ul.output {
     background-color: #FFA;
 }
 
-ul#ul-sortable.output {
-    margin-left: 5px;
-    margin-right: 5px;
- }
-
- ul.output > * {
-    margin-left: 5px
+.ui-sortable {
+    margin-top: 5px;
 }
 
  ul#ul-sortable.output li {
     background-color: #efefff;
  }
+
+ ul#ul-sortableTrash {
+    padding-left: 5px;
+}
+
  
 
 .sortable-code li {
@@ -78,7 +79,6 @@ ul#ul-sortable.output {
     overflow: hidden;
 
     background-color: lightyellow;
-    margin-left: 5px;
     margin-right: 5px;
 }
 .sortable-code li:hover {
@@ -202,7 +202,7 @@ div#instructions > hr {
 
 }
 
-div#button-div a {
+#button-div div{
     float: right;
  }
 
