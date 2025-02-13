@@ -59,3 +59,11 @@ function parsonsGrade(feedback) {
     ACOS.sendEvent('log', {log:parson.user_actions, problemName: $("#js-parsons-id").val()});
   } 
 }
+
+function resizePostMessage() {
+  parent.postMessage({ 
+    messageType: "resize", 
+    iframeHeight: document.body.scrollHeight,  
+    iframeUrl: window.location.href 
+  }, "*");
+}
