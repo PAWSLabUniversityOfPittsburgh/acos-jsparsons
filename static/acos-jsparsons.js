@@ -8,15 +8,41 @@ var unittest;
 
 function displayErrors(feedback) { 
   if(feedback.length > 0) { 
-    $("#feedback-dialog").html(feedback[0]).dialog().dialog("open");
+    showDialog("Error", feedback[0]);
   } 
 }
 
-function display_feedback(feedback) { 
+function display_feedback(feedback, correct=True) { 
   if(feedback.length > 0) { 
-    $("#feedback-dialog").html(feedback[0]).dialog().dialog("open");
+    showDialog("Feedback", feedback[0]);
   } 
 }
+
+function showDialog(title, message, callback, options) {
+  var buttons = {};
+  buttons[options?(options.buttonTitle || "OK"):"OK"] = function() {
+    $(this).dialog( "close" );
+  };
+  var opts = $.extend(true,
+                      { buttons: buttons,
+                        modal: true,
+                        title: title,
+                        draggable: false,
+                        close: function() {
+                          // if there is a callback, call it
+                          if ($.isFunction(callback)) {
+                            callback();
+                          }
+                          return true;
+                        }
+                      },
+                      options);
+  $("#feedback-dialog") // find the dialog element
+        .find("p") // find the p element inside
+            .text(message) // set the feedback text
+        .end() // go back to the #feedbackDialog element
+        .dialog(opts);
+};
 
 function parsonsGrade(feedback) {
   // For acos-jsparsons-gamey-pseudo contentPackage:
