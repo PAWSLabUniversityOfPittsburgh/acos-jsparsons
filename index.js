@@ -57,7 +57,7 @@ JSPARSONS.addToBody = function(params) {
         '    <div>' +
           '    <a href="#" id="newInstanceLink" class="waves-effect waves-light btn btn-sm">Reset</a>' +
           '    <a href="#" id="feedbackLink" class="waves-effect waves-light btn btn-sm">Check</a>' +
-        '    </div>';
+        '    </div>' +
         '</div>';
 };
 
