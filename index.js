@@ -53,9 +53,11 @@ JSPARSONS.addToBody = function(params) {
         '<div id="sortable" class="sortable-code">' +
         '</div>' +
         '<div style="clear:both;"></div>' +
-        '<div id="button-div">' +
-        '    <a href="#" id="newInstanceLink" class="waves-effect waves-light btn btn-sm">Reset</a>' +
-        '    <a href="#" id="feedbackLink" class="waves-effect waves-light btn btn-sm">Check</a>' +
+        '<div id="button-div">' + 
+        '    <div>' +
+          '    <a href="#" id="newInstanceLink" class="waves-effect waves-light btn btn-sm">Reset</a>' +
+          '    <a href="#" id="feedbackLink" class="waves-effect waves-light btn btn-sm">Check</a>' +
+        '    </div>';
         '</div>';
 };
 
