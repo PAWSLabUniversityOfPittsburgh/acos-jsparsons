@@ -8,13 +8,13 @@ var unittest;
 
 function displayErrors(feedback) { 
   if(feedback.length > 0) { 
-    showDialog("Error", feedback[0]);
+    showDialog("Error", Array.isArray(feedback) ? feedback[0] : feedback);
   } 
 }
 
 function display_feedback(feedback, correct=True) { 
   if(feedback.length > 0) { 
-    showDialog("Feedback", feedback[0]);
+    showDialog("Feedback", Array.isArray(feedback) ? feedback[0] : feedback);
   } 
 }
 
